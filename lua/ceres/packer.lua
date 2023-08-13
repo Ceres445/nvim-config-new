@@ -90,6 +90,8 @@ return require('packer').startup(function(use)
     use 'vim-python/python-syntax'
     --  Format, code help
     use 'psf/black'
+    use 'github/copilot.vim'
+
     use 'ggandor/lightspeed.nvim'
     use 'windwp/nvim-autopairs'
     use 'tpope/vim-surround'

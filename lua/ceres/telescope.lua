@@ -6,7 +6,7 @@ local telescope = require("telescope")
 telescope.setup({
     defaults = {
         file_sorter = require("telescope.sorters").get_fzy_sorter,
-        file_ignore_patterns = { 'venv', 'node_modules', '__pycache__', 'target', 'env'},
+        file_ignore_patterns = { 'venv', 'node_modules', '__pycache__', 'target', 'env', 'build', 'devel'},
         prompt_prefix = " >",
         color_devicons = true,
         file_previewer = require("telescope.previewers").vim_buffer_cat.new,

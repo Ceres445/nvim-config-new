@@ -8,20 +8,6 @@ require('mason').setup()
 
 local servers = {
     pyright = {},
-    rust_analyzer = {},
-    tsserver = {},
-    vimls = {},
-    eslint = {},
-    lua_ls = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
-    },
-    clangd = {
-        UseTab = 'Always',
-    }
-
 }
 
 local on_attach = function(_, bufnr)
@@ -157,43 +143,3 @@ cmp.setup.cmdline(':', {
     })
 })
 
-
-
-
--- local lsp_installer = require("nvim-lsp-installer")
-
--- lsp_installer.settings({
---     ui = {
---         icons = {
---             server_installed = "✓",
---             server_pending = "➜",
---             server_uninstalled = "✗"
---         }
---     }
--- })
--- lsp_installer.on_server_ready(function(server)
---     local opts = {
---         capabilities = capabilities
---     }
---     if server.name == "gopls" then
---         opts.settings = {
---             gopls = {
---                 analyses = {
---                     unusedparams = true,
---                 },
---                 staticcheck = true,
---             },
---             capabilities = capabilities,
---         }
---     elseif server.name == "sumneko_lua" then
---         opts.settings = {
---             Lua = {
---                 diagnostics = {
---                     globals = { 'vim' }
---                 }
---             },
---             capabilities = capabilities,
---         }
---     end
---     server:setup(opts)
--- end)

@@ -159,63 +159,6 @@ return require('packer').startup(function(use)
             }
         end
     }
-
-
-    require('gitsigns').setup {
-        signs = {
-            add = { text = '+' },
-            change = { text = '~' },
-            delete = { text = '_' },
-            topdelete = { text = '‾' },
-            changedelete = { text = '~' },
-        },
-
-        on_attach = function(bufnr)
-            local gs = package.loaded.gitsigns
-
-            local function map(mode, l, r, opts)
-                opts = opts or {}
-                opts.buffer = bufnr
-                vim.keymap.set(mode, l, r, opts)
-            end
-
-            -- navigation
-            map('n', ']c', function()
-                if vim.wo.diff then return ']c' end
-                vim.schedule(function() gs.next_hunk() end)
-                return '<ignore>'
-            end, { expr = true })
-
-            map('n', '[c', function()
-                if vim.wo.diff then return '[c' end
-                vim.schedule(function() gs.prev_hunk() end)
-                return '<ignore>'
-            end, { expr = true })
-
-            -- actions
-            map({ 'n', 'v' }, '<leader>hs', ':gitsigns stage_hunk<cr>')
-            map({ 'n', 'v' }, '<leader>hr', ':gitsigns reset_hunk<cr>')
-            map('n', '<leader>hs', gs.stage_buffer)
-            map('n', '<leader>hu', gs.undo_stage_hunk)
-            map('n', '<leader>hr', gs.reset_buffer)
-            map('n', '<leader>hp', gs.preview_hunk)
-            map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-            map('n', '<leader>tb', gs.toggle_current_line_blame)
-            map('n', '<leader>hd', gs.diffthis)
-            map('n', '<leader>hd', function() gs.diffthis('~') end)
-            map('n', '<leader>td', gs.toggle_deleted)
-
-            -- text object
-            map({ 'o', 'x' }, 'ih', ':<c-u>gitsigns select_hunk<cr>')
-        end
-    }
-
-
-
-    -- use 'airblade/vim-gitgutter'
-
-
-
     --  VIM extras
     use { 'akinsho/toggleterm.nvim',
         config = function()
@@ -252,24 +195,11 @@ return require('packer').startup(function(use)
             }
         end }
 
-    use 'folke/trouble.nvim'
     use { 'folke/which-key.nvim',
         config = function()
             require('which-key').setup()
         end
     }
-    use { 'rmagatti/auto-session',
-        config = function()
-            require('auto-session').setup {
-                log_level = 'info',
-                auto_session_suppress_dirs = { '~/' },
-                auto_save_enabled = true,
-                auto_restore_interval = true,
-            }
-        end
-    }
-    use 'rmagatti/session-lens'
-
 
     -- " dev icons
     use 'kyazdani42/nvim-web-devicons'
